@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -31,3 +31,11 @@ class SArticleId(BaseModel):
 
 class ArticleSearchRequest(BaseModel):
     tags: List[str]
+
+class ArticleUpdate(BaseModel):
+    tags: Optional[List[str]]
+    title: Optional[str]
+    text: Optional[str]
+
+    class Config:
+        orm_mode = True
