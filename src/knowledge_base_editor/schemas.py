@@ -8,6 +8,9 @@ class SArticleAdd(BaseModel):
     title: str
     text: str
 
+    class Config:
+        orm_mode = True
+
 class SArticle(SArticleAdd):
     id: int
 

@@ -6,23 +6,14 @@ from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import get_async_session
-from src.knowledge_base.schemas import Article, ArticleSearchRequest
+from src.knowledge_base_editor.schemas import Article, ArticleSearchRequest, SArticleAdd
 from src.models import ArticleOrm
 
 
 router = APIRouter(
     prefix="/knowledge-base",
-    tags=["Articles"],
+    tags=["User Knowledge Base"],
 )
-
-@router.post("/create-article", response_model=Article)
-async def add_article(article: Article, session: AsyncSession = Depends(get_async_session)):
-    article_orm = ArticleOrm(**article.dict())
-    session.add(article_orm)
-    await session.commit()
-    await session.refresh(article_orm)
-    # article_id = await ArticleRepository.add_one(article)
-    return article_orm
 
 @router.get("", response_model=List[Article])
 async def get_articles(session: AsyncSession = Depends(get_async_session)):
