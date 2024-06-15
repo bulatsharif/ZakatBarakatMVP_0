@@ -27,11 +27,7 @@ def upgrade() -> None:
     sa.Column('text', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-    op.drop_table('operation')
-    op.drop_index('ix_user_email', table_name='user')
-    op.drop_table('user')
-    op.drop_table('messages')
-    op.drop_table('role')
+
     # ### end Alembic commands ###
 
 
